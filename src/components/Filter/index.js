@@ -1,9 +1,9 @@
 import React from 'react';
 import Downshift from 'downshift';
 
-export default function({ onChange, items }) {
+export default function({ onChange, items, placeholder, defaultItemSelected }) {
 	return (
-		<Downshift onChange={onChange}>
+		<Downshift onChange={onChange} defaultItemSelected={defaultItemSelected}>
 			{({
 				getInputProps,
 				getItemProps,
@@ -16,7 +16,7 @@ export default function({ onChange, items }) {
 				<div>
 					<input
 						{...getInputProps({
-							placeholder: 'Filter by a choice',
+							placeholder,
 							onFocus: openMenu
 						})}
 					/>
@@ -36,8 +36,7 @@ export default function({ onChange, items }) {
 											backgroundColor:
 												highlightedIndex === index ? 'gray' : 'white',
 											fontWeight: selectedItem === item ? 'bold' : 'normal'
-										}}
-									>
+										}}>
 										{item}
 									</div>
 								))}

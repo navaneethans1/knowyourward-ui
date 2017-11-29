@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import Filter from './components/Filter';
+import Filters from './components/Filters';
 import './App.css';
 
 class App extends Component {
 	render() {
 		return (
-			<div className="App">
-				<Filter
-					items={['Apple', 'orange', 'carrot']}
-					onChange={selectedItem => console.log(selectedItem)}
-				/>
+			<div className="app-container">
+				<Filters />
 			</div>
 		);
 	}
