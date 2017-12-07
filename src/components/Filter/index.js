@@ -1,7 +1,9 @@
 import React from 'react';
 import Downshift from 'downshift';
+import { Colors } from '@blueprintjs/core';
 
 export default function({ onChange, items, placeholder, defaultItemSelected }) {
+	console.log(Colors);
 	return (
 		<Downshift onChange={onChange} defaultItemSelected={defaultItemSelected}>
 			{({
@@ -15,13 +17,16 @@ export default function({ onChange, items, placeholder, defaultItemSelected }) {
 			}) => (
 				<div>
 					<input
+						className="pt-input pt-large pt-fill"
+						dir="auto"
+						type="text"
 						{...getInputProps({
 							placeholder,
 							onFocus: openMenu
 						})}
 					/>
 					{isOpen ? (
-						<div style={{ border: '1px solid #ccc' }}>
+						<ul className="pt-menu pt-large pt-elevation-1">
 							{items
 								.filter(
 									i =>
@@ -29,18 +34,20 @@ export default function({ onChange, items, placeholder, defaultItemSelected }) {
 										i.toLowerCase().includes(inputValue.toLowerCase())
 								)
 								.map((item, index) => (
-									<div
-										{...getItemProps({ item })}
-										key={item}
-										style={{
-											backgroundColor:
-												highlightedIndex === index ? 'gray' : 'white',
-											fontWeight: selectedItem === item ? 'bold' : 'normal'
-										}}>
-										{item}
-									</div>
+									<li {...getItemProps({ item })} key={item}>
+										<a
+											className="pt-menu-item"
+											style={{
+												backgroundColor:
+													highlightedIndex === index
+														? Colors.LIGHT_GRAY4
+														: Colors.WHITE
+											}}>
+											{item}
+										</a>
+									</li>
 								))}
-						</div>
+						</ul>
 					) : null}
 				</div>
 			)}
