@@ -3,7 +3,6 @@ import Downshift from 'downshift';
 import { Colors } from '@blueprintjs/core';
 
 export default function({ onChange, items, placeholder, defaultItemSelected }) {
-	console.log(Colors);
 	return (
 		<Downshift onChange={onChange} defaultItemSelected={defaultItemSelected}>
 			{({
@@ -17,6 +16,7 @@ export default function({ onChange, items, placeholder, defaultItemSelected }) {
 			}) => (
 				<div>
 					<input
+						onKeyPress={e => console.log(e.which)}
 						className="pt-input pt-large pt-fill"
 						dir="auto"
 						type="text"

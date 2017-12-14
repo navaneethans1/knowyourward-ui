@@ -3,3 +3,33 @@ section.filters {
 	padding: 50px;
 	height: 150px;
 }
+
+.question-cards-container {
+	width: 60vw;
+	margin: 50px auto 0;
+	position: relative;
+}
+
+.question-cards-container .question-card {
+	height: 50vh;
+}
+
+.question-cards-container .question-title {
+	background-color: #d8e1e8;
+}
+
+.question-cards-container .question-title h2 {
+	line-height: 1.5;
+}
+
+.question-graph {
+	height: calc(50vh - 40px);
+}
+
+.question-title {
+	height: calc(50vh);
+	padding: 20px;
+	position: relative;
+	left: -28px;
+	top: -20px;
+}
