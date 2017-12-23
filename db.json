@@ -1,0 +1,36 @@
+{
+  "filter": [
+    {
+      "id": 1,
+      "title": "Sex",
+      "options": [
+        { "id": 1, "value": "male", "label": "Male" },
+        { "id": 2, "value": "female", "label": "Female" }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Ward",
+      "options": [
+        { "id": 1, "value": 123, "label": "Palavakkam" },
+        { "id": 2, "value": 456, "label": "Thiruvanmiyur" }
+      ]
+    }
+  ],
+  "category": [
+    { "id": 1, "title": "Street Lights" },
+    { "id": 2, "title": "Traffic Condition" }
+  ],
+  "questions": [
+    {
+      "id": 1,
+      "title": "Are street lights functioning?",
+      "data": [["Yes", "No"], ["75", "25"]]
+    },
+    {
+      "id": 2,
+      "title": "How would rate the traffic conditions in peak hours",
+      "data": [["1", "2", "3", "4", "5"], ["20", "20", "40", "10", "10"]]
+    }
+  ]
+}
