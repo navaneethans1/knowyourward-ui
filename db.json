@@ -1,5 +1,5 @@
 {
-  "filter": [
+  "filters": [
     {
       "id": 1,
       "title": "Sex",
@@ -17,7 +17,7 @@
       ]
     }
   ],
-  "category": [
+  "categories": [
     { "id": 1, "title": "Street Lights" },
     { "id": 2, "title": "Traffic Condition" }
   ],
