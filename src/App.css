@@ -1,7 +1,9 @@
 section.filters {
 	background-color: #d8e1e8;
 	padding: 50px;
-	height: 150px;
+	height: 200px;
+  position: relative;
+  z-index: 10;
 }
 
 .question-cards-container {
