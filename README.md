@@ -2,7 +2,7 @@
 
 ## Prologue
 
-Members of certain localities in Chennai participates in a survey.
+Members of certain localities in Chennai participate in a survey.
 
 The survey aims
 -  to understand awareness of citizens regarding services and infrastructure
