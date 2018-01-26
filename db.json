@@ -4,16 +4,16 @@
       "id": 1,
       "title": "Sex",
       "options": [
-        { "id": 1, "value": "male", "label": "Male" },
-        { "id": 2, "value": "female", "label": "Female" }
+        { "id": 1, "value": "male", "title": "Male" },
+        { "id": 2, "value": "female", "title": "Female" }
       ]
     },
     {
       "id": 2,
       "title": "Ward",
       "options": [
-        { "id": 1, "value": 123, "label": "Palavakkam" },
-        { "id": 2, "value": 456, "label": "Thiruvanmiyur" }
+        { "id": 1, "value": 123, "title": "Palavakkam" },
+        { "id": 2, "value": 456, "title": "Thiruvanmiyur" }
       ]
     }
   ],

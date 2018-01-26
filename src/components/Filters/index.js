@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import Filter from '../Filter';
 import * as actions from '../../actions';
+import find from 'lodash.find';
 
 let filterByQuestionCatergyOptions = [
   'All',
@@ -14,6 +15,10 @@ let filterByQuestionCatergyOptions = [
 const mapStateToProps = state => ({
   filters: state.filters.items,
   selectedFilter: state.app.selectedFilter,
+  optionsForSelectedFilter: state.app.selectedFilter && find(
+    state.filters.items,
+    {id: state.app.selectedFilter}
+  ).options
 });
 
 const mapDispatchToProps = dispatch => {
@@ -39,6 +44,7 @@ class Filters extends Component {
 
   render() {
     const filterItems = this.props.filters;
+    const filterOptionItems = this.props.optionsForSelectedFilter;
     const { selectFilter } = this.props;
 
     return (
@@ -47,14 +53,25 @@ class Filters extends Component {
           <Row className="">
             <Col md={6}>
               <h2>Filter by resident characteristics</h2>
-              <Filter
-                key="filter"
-                items={filterItems}
-                defaultItemSelected="All"
-                placeholder="Filter by resident characteristics"
-                onChange={selectFilter}
-                itemToString={(i) => i.title ? i.title : i}
-              />
+              <Row>
+                <Col md={6}>
+                  <Filter
+                    key="filter"
+                    items={filterItems}
+                    placeholder="Filter by resident characteristics"
+                    onChange={selectFilter}
+                    itemToString={(i) => i ? i.title : ''}
+                  />
+                </Col>
+                <Col md={6}>
+                  <Filter
+                    key="filterOption"
+                    items={filterOptionItems}
+                    placeholder="Filter by resident characteristics"
+                    itemToString={(i) => i ? i.title : ''}
+                  />
+                </Col>
+              </Row>
             </Col>
             <Col md={6}>
               <h2>Filter by question category</h2>
