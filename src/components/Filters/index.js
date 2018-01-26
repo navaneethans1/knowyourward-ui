@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import Filter from '../Filter';
-
-let filterByResidentOptions = ['All', 'Ward', 'Sex'];
+import * as actions from '../../actions';
 
 let filterByQuestionCatergyOptions = [
   'All',
@@ -13,7 +12,8 @@ let filterByQuestionCatergyOptions = [
 ];
 
 const mapStateToProps = state => ({
-  filters: state.filters.items
+  filters: state.filters.items,
+  selectedFilter: state.app.selectedFilter,
 });
 
 const mapDispatchToProps = dispatch => {
@@ -22,6 +22,10 @@ const mapDispatchToProps = dispatch => {
       dispatch({
         type: 'FETCH_FILTERS_REQUESTED'
       });
+    },
+
+    selectFilter(selectedFilter) {
+      dispatch(actions.selectFilter(selectedFilter.id));
     }
   };
 };
@@ -34,7 +38,9 @@ class Filters extends Component {
   }
 
   render() {
-    const filterItems = this.props.filters.map(f => f.title);
+    const filterItems = this.props.filters;
+    const { selectFilter } = this.props;
+
     return (
       <section className="filters">
         <Grid fluid>
@@ -46,7 +52,8 @@ class Filters extends Component {
                 items={filterItems}
                 defaultItemSelected="All"
                 placeholder="Filter by resident characteristics"
-                onChange={e => console.log(e)}
+                onChange={selectFilter}
+                itemToString={(i) => i.title ? i.title : i}
               />
             </Col>
             <Col md={6}>
@@ -54,9 +61,9 @@ class Filters extends Component {
               <Filter
                 key="category"
                 items={filterByQuestionCatergyOptions}
-                defaultItemSelected="All"
                 placeholder="Filter by question category"
                 onChange={e => console.log(e)}
+                itemToString={(i) => i ? i : ''}
               />
             </Col>
           </Row>
