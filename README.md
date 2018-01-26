@@ -25,13 +25,13 @@ We are beginning with
 -  List questions and display the distribution of answers through a bar/pie chart
 
 -  Filter questions based on participant's attributes like
-  -  Sex
-  -  Locality
+    -  Sex
+    -  Locality
 
 -  Filter questions based on different domains of city infrastructure and services like
-  -  education
-  -  food
-  -  drainage
+    -  education
+    -  food
+    -  drainage
 
 
 
