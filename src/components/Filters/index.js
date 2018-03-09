@@ -1,36 +1,40 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Grid, Row, Col } from 'react-flexbox-grid';
-import Filter from '../Filter';
-import * as actions from '../../actions';
-import find from 'lodash.find';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Grid, Row, Col } from "react-flexbox-grid";
+import Filter from "../Filter";
+import * as actions from "../../actions";
+import find from "lodash.find";
 
 let filterByQuestionCatergyOptions = [
-  'All',
-  'Street Lights',
-  'Traffic',
-  'Garbage Disposal'
+  "All",
+  "Street Lights",
+  "Traffic",
+  "Garbage Disposal"
 ];
 
 const mapStateToProps = state => ({
-  filters: state.filters.items,
+  filterItems: state.filters.items,
   selectedFilter: state.app.selectedFilter,
-  optionsForSelectedFilter: state.app.selectedFilter && find(
-    state.filters.items,
-    {id: state.app.selectedFilter}
-  ).options
+  isFilterOptionsEnabled: !state.app.selectedFilter,
+  optionsForSelectedFilter:
+    state.app.selectedFilter &&
+    find(state.filters.items, { id: state.app.selectedFilter }).options
 });
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchFilters() {
       dispatch({
-        type: 'FETCH_FILTERS_REQUESTED'
+        type: "FETCH_FILTERS_REQUESTED"
       });
     },
 
     selectFilter(selectedFilter) {
       dispatch(actions.selectFilter(selectedFilter.id));
+    },
+
+    selectFilterOption(selectedFilterOption) {
+      dispatch(actions.selectFilterOption(selectedFilterOption.id));
     }
   };
 };
@@ -43,9 +47,13 @@ class Filters extends Component {
   }
 
   render() {
-    const filterItems = this.props.filters;
-    const filterOptionItems = this.props.optionsForSelectedFilter;
-    const { selectFilter } = this.props;
+    const {
+      filterItems,
+      optionsForSelectedFilter: filterOptionItems,
+      isFilterOptionsEnabled,
+      selectFilter,
+      selectFilterOption
+    } = this.props;
 
     return (
       <section className="filters">
@@ -60,15 +68,17 @@ class Filters extends Component {
                     items={filterItems}
                     placeholder="Filter by resident characteristics"
                     onChange={selectFilter}
-                    itemToString={(i) => i ? i.title : ''}
+                    itemToString={i => (i ? i.title : "")}
                   />
                 </Col>
                 <Col md={6}>
                   <Filter
                     key="filterOption"
                     items={filterOptionItems}
+                    disabled={isFilterOptionsEnabled}
                     placeholder="Filter by resident characteristics"
-                    itemToString={(i) => i ? i.title : ''}
+                    onChange={selectFilterOption}
+                    itemToString={i => (i ? i.title : "")}
                   />
                 </Col>
               </Row>
@@ -80,7 +90,7 @@ class Filters extends Component {
                 items={filterByQuestionCatergyOptions}
                 placeholder="Filter by question category"
                 onChange={e => console.log(e)}
-                itemToString={(i) => i ? i : ''}
+                itemToString={i => (i ? i : "")}
               />
             </Col>
           </Row>

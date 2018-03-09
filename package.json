@@ -20,7 +20,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "mock-api-server": "json-server --port=3004 db.json"
   },
   "devDependencies": {
     "json-server": "^0.12.1"

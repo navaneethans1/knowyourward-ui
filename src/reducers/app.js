@@ -1,4 +1,4 @@
-import { SELECT_FILTER, SELECT_FILTER_VALUE } from '../actions';
+import { SELECT_FILTER, SELECT_FILTER_OPTION } from "../actions";
 
 export default function(
   state = {
@@ -10,8 +10,8 @@ export default function(
   switch (action.type) {
     case SELECT_FILTER:
       return { ...state, selectedFilter: action.filterID };
-    case SELECT_FILTER_VALUE:
-      return { ...state, selectedFilterValue: action.filterValue };
+    case SELECT_FILTER_OPTION:
+      return { ...state, selectedFilterValue: action.filterOptionID };
     default:
       return state;
   }

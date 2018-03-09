@@ -1,10 +1,17 @@
-import React from 'react';
-import Downshift from 'downshift';
-import { Colors } from '@blueprintjs/core';
+import React from "react";
+import Downshift from "downshift";
+import { Colors } from "@blueprintjs/core";
 
-export default function({ onChange, items, placeholder, defaultItemSelected, itemToString }) {
+export default function({
+  items,
+  placeholder,
+  disabled,
+  defaultItemSelected,
+  onChange,
+  itemToString
+}) {
   const renderItemLabel = item =>
-    item.hasOwnProperty('title') ? item.title : item;
+    item.hasOwnProperty("title") ? item.title : item;
   return (
     <Downshift
       onChange={onChange}
@@ -25,36 +32,38 @@ export default function({ onChange, items, placeholder, defaultItemSelected, ite
             className="pt-input pt-large pt-fill"
             dir="auto"
             type="text"
+            disabled={disabled}
             {...getInputProps({
               placeholder,
-              onFocus: openMenu,
+              onFocus: openMenu
             })}
           />
           {isOpen ? (
             <ul className="pt-menu pt-large pt-elevation-0">
-              {items && items
-                .filter(
-                  i =>
-                    !inputValue ||
-                    renderItemLabel(i)
-                      .toLowerCase()
-                      .includes(inputValue.toLowerCase())
-                )
-                .map((item, index) => (
-                  <li
-                    {...getItemProps({ item })} key={index}>
-                    <a
-                      className="pt-menu-item"
-                      style={{
-                        backgroundColor:
-                          highlightedIndex === index
-                            ? Colors.LIGHT_GRAY4
-                            : Colors.WHITE
-                      }}>
-                      {renderItemLabel(item)}
-                    </a>
-                  </li>
-                ))}
+              {items &&
+                items
+                  .filter(
+                    i =>
+                      !inputValue ||
+                      renderItemLabel(i)
+                        .toLowerCase()
+                        .includes(inputValue.toLowerCase())
+                  )
+                  .map((item, index) => (
+                    <li {...getItemProps({ item })} key={index}>
+                      <a
+                        className="pt-menu-item"
+                        style={{
+                          backgroundColor:
+                            highlightedIndex === index
+                              ? Colors.LIGHT_GRAY4
+                              : Colors.WHITE
+                        }}
+                      >
+                        {renderItemLabel(item)}
+                      </a>
+                    </li>
+                  ))}
             </ul>
           ) : null}
         </div>
