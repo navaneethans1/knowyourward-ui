@@ -1,19 +1,19 @@
-const SELECT_FILTER = "SELECT_FILTER";
-const SELECT_FILTER_OPTION = "SELECT_FILTER_OPTION";
+const SELECT_PARTICIPANT_ATTRIBUTE_TYPE = "SELECT_PARTICIPANT_ATTRIBUTE_TYPE";
+const SELECT_PARTICIPANT_ATTRIBUTE = "SELECT_PARTICIPANT_ATTRIBUTE";
 
-const selectFilter = filterID => ({
-  type: SELECT_FILTER,
-  filterID
+const selectParticipantAttributeType = attributeTypeID => ({
+  type: SELECT_PARTICIPANT_ATTRIBUTE_TYPE,
+  attributeTypeID
 });
 
-const selectFilterOption = filterOptionID => ({
-  type: SELECT_FILTER_OPTION,
-  filterOptionID
+const selectParticipantAttribute = attributeID => ({
+  type: SELECT_PARTICIPANT_ATTRIBUTE,
+  attributeID
 });
 
 export {
-  SELECT_FILTER,
-  SELECT_FILTER_OPTION,
-  selectFilter,
-  selectFilterOption
+  SELECT_PARTICIPANT_ATTRIBUTE_TYPE,
+  SELECT_PARTICIPANT_ATTRIBUTE,
+  selectParticipantAttributeType,
+  selectParticipantAttribute
 };

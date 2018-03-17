@@ -12,13 +12,30 @@ let filterByQuestionCatergyOptions = [
   "Garbage Disposal"
 ];
 
+const findAttributeOptionsForAttributeType = state => {
+  const currentPartcipantAtributeTypeID =
+    state.app.currentPartcipantAtributeTypeID;
+
+  if (currentPartcipantAtributeTypeID) {
+    const participantAttribute = find(
+      state.possibleParticipantAttributes.items,
+      {
+        id: state.app.currentPartcipantAtributeTypeID
+      }
+    );
+
+    return participantAttribute.options;
+  } else {
+    return [];
+  }
+};
+
 const mapStateToProps = state => ({
-  filterItems: state.filters.items,
-  selectedFilter: state.app.selectedFilter,
-  isFilterOptionsEnabled: !state.app.selectedFilter,
-  optionsForSelectedFilter:
-    state.app.selectedFilter &&
-    find(state.filters.items, { id: state.app.selectedFilter }).options
+  currentPartcipantAtributeTypeID: state.app.currentPartcipantAtributeTypeID,
+  shouldParticipantAttributeBeEnabled: !state.app
+    .currentPartcipantAtributeTypeID,
+  participantAttributeTypeOptions: state.possibleParticipantAttributes.items,
+  participantAtrributeOptions: findAttributeOptionsForAttributeType(state)
 });
 
 const mapDispatchToProps = dispatch => {
@@ -29,12 +46,12 @@ const mapDispatchToProps = dispatch => {
       });
     },
 
-    selectFilter(selectedFilter) {
-      dispatch(actions.selectFilter(selectedFilter.id));
+    selectParticipantAttributeType(selectedFilter) {
+      dispatch(actions.selectParticipantAttributeType(selectedFilter.id));
     },
 
-    selectFilterOption(selectedFilterOption) {
-      dispatch(actions.selectFilterOption(selectedFilterOption.id));
+    selectParticipantAttribute(selectedFilterOption) {
+      dispatch(actions.selectParticipantAttribute(selectedFilterOption.id));
     }
   };
 };
@@ -48,11 +65,11 @@ class Filters extends Component {
 
   render() {
     const {
-      filterItems,
-      optionsForSelectedFilter: filterOptionItems,
-      isFilterOptionsEnabled,
-      selectFilter,
-      selectFilterOption
+      participantAttributeTypeOptions,
+      participantAtrributeOptions,
+      shouldParticipantAttributeBeEnabled,
+      selectParticipantAttributeType,
+      selectParticipantAttribute
     } = this.props;
 
     return (
@@ -64,20 +81,20 @@ class Filters extends Component {
               <Row>
                 <Col md={6}>
                   <Filter
-                    key="filter"
-                    items={filterItems}
+                    key="participantAttributeType"
+                    items={participantAttributeTypeOptions}
                     placeholder="Filter by resident characteristics"
-                    onChange={selectFilter}
+                    onChange={selectParticipantAttributeType}
                     itemToString={i => (i ? i.title : "")}
                   />
                 </Col>
                 <Col md={6}>
                   <Filter
-                    key="filterOption"
-                    items={filterOptionItems}
-                    disabled={isFilterOptionsEnabled}
+                    key="participantAtrribute"
+                    items={participantAtrributeOptions}
+                    disabled={shouldParticipantAttributeBeEnabled}
                     placeholder="Filter by resident characteristics"
-                    onChange={selectFilterOption}
+                    onChange={selectParticipantAttribute}
                     itemToString={i => (i ? i.title : "")}
                   />
                 </Col>

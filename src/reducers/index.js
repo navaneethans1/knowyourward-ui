@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux';
-import app from './app';
-import filters from './filters';
+import { combineReducers } from "redux";
+import app from "./app";
+import possibleParticipantAttributes from "./possibleParticipantAttributes";
 
 export default combineReducers({
   app,
-  filters
+  possibleParticipantAttributes
 });
