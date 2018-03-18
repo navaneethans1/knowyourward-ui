@@ -46,12 +46,18 @@ const mapDispatchToProps = dispatch => {
       });
     },
 
-    selectParticipantAttributeType(selectedFilter) {
-      dispatch(actions.selectParticipantAttributeType(selectedFilter.id));
+    selectParticipantAttributeType(selectedParticipantAttributeType) {
+      dispatch(
+        actions.selectParticipantAttributeType(
+          selectedParticipantAttributeType.id
+        )
+      );
     },
 
-    selectParticipantAttribute(selectedFilterOption) {
-      dispatch(actions.selectParticipantAttribute(selectedFilterOption.id));
+    selectParticipantAttribute(selectedParticipantAttribute) {
+      dispatch(
+        actions.selectParticipantAttribute(selectedParticipantAttribute.id)
+      );
     }
   };
 };
