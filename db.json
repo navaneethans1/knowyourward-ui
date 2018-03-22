@@ -23,14 +23,39 @@
   ],
   "questions": [
     {
-      "id": 1,
-      "title": "Are street lights functioning?",
-      "data": [["Yes", "No"], ["75", "25"]]
+      "text_question": "Do you know who your Councillor was? ",
+      "survey": {
+        "survey": 1,
+        "language": "English"
+      },
+      "question": {
+        "question_id": 1,
+        "answer_type": "BL"
+      },
+      "responses": {
+        "false": 158,
+        "null": 213,
+        "true": 55
+      }
     },
     {
-      "id": 2,
-      "title": "How would rate the traffic conditions in peak hours",
-      "data": [["1", "2", "3", "4", "5"], ["20", "20", "40", "10", "10"]]
+      "text_question":
+        "Please rate these statements regarding Power Supply [Availability of uninterrupted power supply]",
+      "survey": {
+        "survey": 1,
+        "language": "English"
+      },
+      "question": {
+        "question_id": 2,
+        "answer_type": "RT"
+      },
+      "responses": {
+        "1": 23,
+        "2": 76,
+        "3": 98,
+        "4": 23,
+        "5": 98
+      }
     }
   ]
 }
