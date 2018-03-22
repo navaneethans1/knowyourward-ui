@@ -5,6 +5,8 @@ import Filter from "../Filter";
 import * as actions from "../../actions";
 import find from "lodash.find";
 
+import { REQUEST_POSSIBLE_PARTICIPANT_ATTRIBUTES } from "../../actions";
+
 let filterByQuestionCatergyOptions = [
   "All",
   "Street Lights",
@@ -32,6 +34,7 @@ const findAttributeOptionsForAttributeType = state => {
 
 const mapStateToProps = state => ({
   currentPartcipantAtributeTypeID: state.app.currentPartcipantAtributeTypeID,
+  currentParticipantAttributeID: state.app.currentParticipantAttributeID,
   shouldParticipantAttributeBeEnabled: !state.app
     .currentPartcipantAtributeTypeID,
   participantAttributeTypeOptions: state.possibleParticipantAttributes.items,
@@ -42,7 +45,7 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchFilters() {
       dispatch({
-        type: "FETCH_FILTERS_REQUESTED"
+        type: REQUEST_POSSIBLE_PARTICIPANT_ATTRIBUTES
       });
     },
 
@@ -71,6 +74,8 @@ class Filters extends Component {
 
   render() {
     const {
+      currentPartcipantAtributeTypeID,
+      currentParticipantAttributeID,
       participantAttributeTypeOptions,
       participantAtrributeOptions,
       shouldParticipantAttributeBeEnabled,
@@ -88,6 +93,7 @@ class Filters extends Component {
                 <Col md={6}>
                   <Filter
                     key="participantAttributeType"
+                    selectedItemID={currentPartcipantAtributeTypeID}
                     items={participantAttributeTypeOptions}
                     placeholder="Filter by resident characteristics"
                     onChange={selectParticipantAttributeType}
@@ -97,6 +103,7 @@ class Filters extends Component {
                 <Col md={6}>
                   <Filter
                     key="participantAtrribute"
+                    selectedItemID={currentParticipantAttributeID}
                     items={participantAtrributeOptions}
                     disabled={shouldParticipantAttributeBeEnabled}
                     placeholder="Filter by resident characteristics"
@@ -110,6 +117,7 @@ class Filters extends Component {
               <h2>Filter by question category</h2>
               <Filter
                 key="category"
+                selectedItemID={null}
                 items={filterByQuestionCatergyOptions}
                 placeholder="Filter by question category"
                 onChange={e => console.log(e)}
