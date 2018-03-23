@@ -29,6 +29,14 @@ section.filters {
 	height: calc(50vh - 40px);
 }
 
+.question-graph .plottable-chart-container {
+  height: 90%;
+}
+
+.question-graph .plottable-axis-container {
+  height: 10%;
+}
+
 .question-title {
 	height: calc(50vh);
 	padding: 20px;

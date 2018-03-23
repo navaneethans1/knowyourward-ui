@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import Plottable from "plottable";
 
 class BarChart extends Component {
@@ -20,12 +20,28 @@ class BarChart extends Component {
       .labelsEnabled(true)
       .renderTo(`div#chart-${id}`);
 
+    var axis = new Plottable.Axes.Category(xScale, "bottom")
+      .yAlignment("center")
+      .renderTo(`div#axes-${id}`);
+
     window.addEventListener("resize", function() {
       plot.redraw();
+      axis.redraw();
     });
   }
   render() {
-    return <div id={`chart-${this.props.id}`} />;
+    return (
+      <Fragment>
+        <div
+          id={`chart-${this.props.id}`}
+          className="plottable-chart-container"
+        />
+        <div
+          id={`axes-${this.props.id}`}
+          className="plottable-axis-container"
+        />
+      </Fragment>
+    );
   }
 }
 
