@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@blueprintjs/core": "^1.34.0",
+    "@reactions/component": "^2.0.2",
     "downshift": "^1.18.0",
     "lodash.find": "^4.6.0",
     "plottable": "^3.7.0",
