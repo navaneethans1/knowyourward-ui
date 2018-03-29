@@ -22,9 +22,9 @@ export default function({
   return (
     <Component
       initialState={{ isDirty: false }}
-      didUpdate={({ setState }) => {
-        isDirty: false;
-      }}
+      didUpdate={({ setState }) => ({
+        isDirty: false
+      })}
     >
       {({ state, setState }) => (
         <Downshift
