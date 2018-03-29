@@ -3,16 +3,11 @@ import { connect } from "react-redux";
 import { Grid, Row, Col } from "react-flexbox-grid";
 import Filter from "../Filter";
 import * as actions from "../../actions";
+import { selectQuestionCategory } from "../../actions/possibleQuestionCategories";
 import find from "lodash.find";
 
 import { REQUEST_POSSIBLE_PARTICIPANT_ATTRIBUTES } from "../../actions";
-
-let filterByQuestionCatergyOptions = [
-  "All",
-  "Street Lights",
-  "Traffic",
-  "Garbage Disposal"
-];
+import { REQUEST_QUESTION_CATEGORIES } from "../../actions/possibleQuestionCategories";
 
 const findAttributeOptionsForAttributeType = state => {
   const currentPartcipantAtributeTypeID =
@@ -38,7 +33,8 @@ const mapStateToProps = state => ({
   shouldParticipantAttributeBeEnabled: !state.app
     .currentPartcipantAtributeTypeID,
   participantAttributeTypeOptions: state.possibleParticipantAttributes.items,
-  participantAtrributeOptions: findAttributeOptionsForAttributeType(state)
+  participantAtrributeOptions: findAttributeOptionsForAttributeType(state),
+  questionCategoryOptions: state.possibleQuestionCategories.items
 });
 
 const mapDispatchToProps = dispatch => {
@@ -46,6 +42,10 @@ const mapDispatchToProps = dispatch => {
     fetchFilters() {
       dispatch({
         type: REQUEST_POSSIBLE_PARTICIPANT_ATTRIBUTES
+      });
+
+      dispatch({
+        type: REQUEST_QUESTION_CATEGORIES
       });
     },
 
@@ -61,6 +61,10 @@ const mapDispatchToProps = dispatch => {
       dispatch(
         actions.selectParticipantAttribute(selectedParticipantAttribute.id)
       );
+    },
+
+    selectQuestionCategory(selectedQuestionCategory) {
+      dispatch(selectQuestionCategory(selectedQuestionCategory.id));
     }
   };
 };
@@ -78,9 +82,11 @@ class Filters extends Component {
       currentParticipantAttributeID,
       participantAttributeTypeOptions,
       participantAtrributeOptions,
+      questionCategoryOptions,
       shouldParticipantAttributeBeEnabled,
       selectParticipantAttributeType,
-      selectParticipantAttribute
+      selectParticipantAttribute,
+      selectQuestionCategory
     } = this.props;
 
     return (
@@ -118,10 +124,10 @@ class Filters extends Component {
               <Filter
                 key="category"
                 selectedItemID={null}
-                items={filterByQuestionCatergyOptions}
+                items={questionCategoryOptions}
                 placeholder="Filter by question category"
-                onChange={e => console.log(e)}
-                itemToString={i => (i ? i : "")}
+                onChange={selectQuestionCategory}
+                itemToString={i => (i ? i.title : "")}
               />
             </Col>
           </Row>

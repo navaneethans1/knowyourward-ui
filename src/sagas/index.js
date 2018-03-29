@@ -8,9 +8,30 @@ import {
 } from "../actions";
 
 import {
+  REQUEST_QUESTION_CATEGORIES,
+  SUCCESS_QUESTION_CATEGORIES,
+  ERROR_QUESTION_CATEGORIES
+} from "../actions/possibleQuestionCategories";
+
+import {
   REQUEST_SURVEY_AGGREGATE_RESULTS,
   SUCCESS_SURVEY_AGGREGATE_RESULTS
 } from "../actions/questions";
+
+function* watchFetchPossibleParticipantAttributes() {
+  yield takeEvery(
+    REQUEST_POSSIBLE_PARTICIPANT_ATTRIBUTES,
+    fetchPossibleParticipantAttributes
+  );
+}
+
+function* watchFetchPossibleQuestionCategories() {
+  yield takeEvery(REQUEST_QUESTION_CATEGORIES, fetchPossibleQuestionCategories);
+}
+
+function* watchFetchSurveyQuestions() {
+  yield takeEvery(REQUEST_SURVEY_AGGREGATE_RESULTS, fetchSurveyQuestions);
+}
 
 function* watchForChangeInParticipantAttributeType() {
   yield takeEvery(SELECT_PARTICIPANT_ATTRIBUTE_TYPE, function*() {
@@ -20,17 +41,6 @@ function* watchForChangeInParticipantAttributeType() {
   });
 }
 
-function* watchFetchPossibleParticipantAttributes() {
-  yield takeEvery(
-    REQUEST_POSSIBLE_PARTICIPANT_ATTRIBUTES,
-    fetchPossibleParticipantAttributes
-  );
-}
-
-function* watchFetchSurveyQuestions() {
-  yield takeEvery(REQUEST_SURVEY_AGGREGATE_RESULTS, fetchSurveyQuestions);
-}
-
 export function* fetchPossibleParticipantAttributes(action) {
   const response = yield call(fetch, "http://localhost:3004/filters");
   const filters = yield response.json();
@@ -38,6 +48,23 @@ export function* fetchPossibleParticipantAttributes(action) {
     type: SUCCESS_POSSIBLE_PARTICIPANT_ATTRIBUTES,
     payload: { filters }
   });
+}
+
+export function* fetchPossibleQuestionCategories(action) {
+  const response = yield call(fetch, "http://localhost:3004/categories");
+  const filters = yield response.json();
+
+  try {
+    yield put({
+      type: SUCCESS_QUESTION_CATEGORIES,
+      payload: { filters }
+    });
+  } catch (e) {
+    yield put({
+      type: ERROR_QUESTION_CATEGORIES,
+      payload: { error: e }
+    });
+  }
 }
 
 export function* fetchSurveyQuestions() {
@@ -55,6 +82,7 @@ export default function* rootSaga() {
   yield all([
     watchFetchSurveyQuestions(),
     watchFetchPossibleParticipantAttributes(),
+    watchFetchPossibleQuestionCategories(),
     watchForChangeInParticipantAttributeType()
   ]);
 }
